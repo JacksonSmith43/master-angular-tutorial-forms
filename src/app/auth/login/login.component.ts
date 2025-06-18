@@ -16,6 +16,17 @@ export class LoginComponent {
 
   constructor() {
     afterNextRender(() => { // This will run after the view is initialised. 
+      const savedForm = window.localStorage.getItem("saved-login-form");
+
+      if (savedForm) {
+        const loadedFormData = JSON.parse(savedForm);
+        const savedEmail = loadedFormData.email;
+
+        setTimeout(() => { // This is required to ensure that the form is available before setting the value. 
+          this.form().controls["email"].setValue(savedEmail);
+        }, 1);
+      }
+
       const subscription = this.form().valueChanges?.pipe(debounceTime(500)).subscribe({ // This will make sure that the valueChanges observable emits only after 500ms of inactivity. 
         next: (value) => window.localStorage.setItem("saved-login-form", JSON.stringify({ email: value.email }) // Saves the email field to localStorage after 500ms of inactivity in an object with the key "saved-login-form".
         )
