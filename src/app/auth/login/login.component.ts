@@ -16,7 +16,11 @@ export class LoginComponent {
   });
 
   onSubmit() {
+    const enteredEmail = this.form.value.email;
+    const enteredpssword = this.form.value.password;
 
+    console.log("enteredEmail: ", enteredEmail);
+    console.log("enteredpssword: ", enteredpssword);
   }
 
 }
