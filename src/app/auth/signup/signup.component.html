@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <fieldset formArrayName="form.controls.source">
+  <fieldset formArrayName="source">
     <legend>How did you find us?</legend>
     <div class="control">
       <input type="checkbox" id="google" name="acquisition" value="google" formControlName="0" />
@@ -109,4 +109,8 @@
     <button type="reset" class="button button-flat" (click)="onReset()">Reset</button>
     <button type="submit" class="button">Sign up</button>
   </p>
+
+  @if(form.invalid && form.touched){
+  <p class="control-error">Invalid form.</p>
+  }
 </form>
