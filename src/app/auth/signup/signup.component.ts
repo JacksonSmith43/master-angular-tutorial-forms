@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -14,16 +14,24 @@ export class SignupComponent {
     email: new FormControl("", {
       validators: [Validators.email, Validators.required]
     }),
-    password: new FormControl("", {
-      validators: [Validators.minLength(6), Validators.required]
+
+    passwords: new FormGroup({
+      password: new FormControl("", {
+        validators: [Validators.minLength(6), Validators.required]
+      }),
+      confirmPassword: new FormControl("", { validators: [Validators.minLength(6), Validators.required] }),
     }),
-    confirmPassword: new FormControl("", { validators: [Validators.minLength(6), Validators.required] }),
+
     firstName: new FormControl("", { validators: [Validators.required] }),
     lastName: new FormControl("", { validators: [Validators.required] }),
-    street: new FormControl("", { validators: [Validators.required] }),
-    number: new FormControl("", { validators: [Validators.required] }),
-    postCode: new FormControl("", { validators: [Validators.required] }),
-    city: new FormControl("", { validators: [Validators.required] }),
+
+    address: new FormGroup({
+      street: new FormControl("", { validators: [Validators.required] }),
+      number: new FormControl("", { validators: [Validators.required] }),
+      postCode: new FormControl("", { validators: [Validators.required] }),
+      city: new FormControl("", { validators: [Validators.required] }),
+    }),
+
     role: new FormControl<"student" | "teacher" | "employee" | "founder" | "other">("student", { validators: [Validators.required] }),
     agree: new FormControl(false, { validators: [Validators.required] })
   })
